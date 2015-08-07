@@ -179,7 +179,7 @@ public class Snackbar extends SnackbarLayout {
      */
     public Snackbar icon(int iconId) {
         mIconId = iconId;
-        if (snackbarIcon != null) {
+        if (snackbarIcon != null && iconId > 0) {
             snackbarIcon.setImageResource(mIconId);
         }
         return this;
@@ -691,7 +691,7 @@ public class Snackbar extends SnackbarLayout {
         }
 
         snackbarIcon = (ImageView) layout.findViewById(R.id.sb__icon);
-        if (mIconId != 0) {
+        if (mIconId > 0) {
             snackbarIcon.setVisibility(View.VISIBLE);
             snackbarIcon.setImageResource(mIconId);
         } else {
