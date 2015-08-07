@@ -28,6 +28,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -79,6 +80,8 @@ public class Snackbar extends SnackbarLayout {
     private SnackbarDuration mDuration = SnackbarDuration.LENGTH_LONG;
     private CharSequence mText;
     private TextView snackbarText;
+    private int mIconId;
+    private ImageView snackbarIcon;
     private int mColor = mUndefinedColor;
     private int mTextColor = mUndefinedColor;
     private int mOffset;
@@ -165,6 +168,19 @@ public class Snackbar extends SnackbarLayout {
         mText = text;
         if (snackbarText != null) {
             snackbarText.setText(mText);
+        }
+        return this;
+    }
+
+    /**
+     * Sets the icon
+     * @param iconId
+     * @return
+     */
+    public Snackbar icon(int iconId) {
+        mIconId = iconId;
+        if (snackbarIcon != null) {
+            snackbarIcon.setImageResource(mIconId);
         }
         return this;
     }
@@ -672,6 +688,14 @@ public class Snackbar extends SnackbarLayout {
             snackbarAction.setMaxLines(mType.getMaxLines());
         } else {
             snackbarAction.setVisibility(GONE);
+        }
+
+        snackbarIcon = (ImageView) layout.findViewById(R.id.sb__icon);
+        if (mIconId != 0) {
+            snackbarIcon.setVisibility(View.VISIBLE);
+            snackbarIcon.setImageResource(mIconId);
+        } else {
+            snackbarIcon.setVisibility(View.GONE);
         }
 
         setClickable(true);
